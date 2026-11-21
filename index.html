@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For you my ♡</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%92%97%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ffdceb;--pink2:#ffb3d1;--hot:#ff6fae;--lav:#c9b8ff;--lav2:#ece6ff;--violet:#7f5cf0;--navy:#1f2a6b;--ink:#2a2362;--soft:#6a60a8;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Nunito,system-ui,sans-serif;color:var(--ink);line-height:1.55;
+ background:radial-gradient(circle at 10% 6%,#ffd3e6 0,transparent 42%),radial-gradient(circle at 92% 18%,#e0d4ff 0,transparent 46%),
+ radial-gradient(circle at 15% 96%,#ffdcec 0,transparent 46%),radial-gradient(circle at 90% 90%,#e8e0ff 0,transparent 40%),linear-gradient(#fff,#fff2f8) fixed}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;margin:0;color:var(--ink)}
+.hero h1,.center h1{background:linear-gradient(90deg,var(--violet),var(--hot));-webkit-background-clip:text;background-clip:text;color:transparent}
+.screen{display:none;position:relative;z-index:1;min-height:100vh;padding:24px 18px 70px;max-width:560px;margin:0 auto}
+.screen.on{display:block}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px 24px;color:#fff;cursor:pointer;
+ background:linear-gradient(135deg,var(--violet),var(--hot));box-shadow:0 6px 16px rgba(127,92,240,.28);transition:transform .15s}
+button:active{transform:scale(.96)}
+button.alt{background:#fff;color:var(--violet);box-shadow:0 0 0 1.5px var(--lav)}
+button:disabled{opacity:.4;pointer-events:none}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+input,textarea{font:inherit;width:100%;padding:12px 16px;border-radius:18px;border:1.5px solid var(--lav);background:#fff;color:var(--ink)}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;min-height:80vh}
+/* floating hearts */
+.fl{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fl span{position:absolute;bottom:-50px;left:var(--l);font-size:var(--s);color:var(--c);opacity:0;animation:rise var(--d) linear var(--w) infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.55}100%{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+/* intro */
+#intro{position:relative;overflow:hidden;max-width:none;padding:0}
+#intro .tt{position:absolute;top:9%;left:0;right:0;text-align:center;font-family:"Cormorant Garamond",serif;font-size:1.7rem;color:var(--violet)}
+.sw{position:absolute;display:flex;flex-direction:column;align-items:center}
+.star{background:none;box-shadow:none;padding:0;width:68px;height:68px;border-radius:50%;transition:transform .5s,opacity .5s;filter:drop-shadow(0 0 10px rgba(255,111,174,.55));animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{transform:scale(1.12)}}
+.star svg{width:100%;height:100%;fill:#fff;stroke:var(--violet);stroke-width:1.6;stroke-linejoin:round}
+.star.dim{opacity:.35;pointer-events:none;animation:none}
+.star.done{transform:scale(.6);animation:none}.star.done svg{fill:var(--pink2)}
+.hint{font-size:.95rem;color:var(--violet);font-weight:700;text-align:center;width:150px}
+.hint svg{display:block;margin:2px auto;width:60px;height:70px;overflow:visible}
+.hint path{fill:none;stroke:var(--violet);stroke-width:2.2;stroke-dasharray:2 7;stroke-linecap:round}
+.hint polyline{fill:none;stroke:var(--violet);stroke-width:2.2;stroke-linecap:round}
+#link{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#link line{stroke:var(--violet);stroke-width:2;stroke-dasharray:2 8;stroke-linecap:round}
+.fade{opacity:0;transition:opacity .6s}
+#cont{position:absolute;bottom:9%;left:50%;transform:translateX(-50%)}
+/* her + day */
+.hero{text-align:center;padding:26px 0 6px}.hero h1{font-size:2.7rem;line-height:1.1}
+.hero p{color:var(--soft);margin:8px 0 0}
+.bar{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.bar button{padding:8px 16px;font-size:.9rem}
+.card{background:#fff;border-radius:22px;padding:16px 18px 16px 24px;margin-top:16px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(127,92,240,.13)}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(var(--a1,#ff8fbd),var(--a2,#c9b8ff))}
+.card.lock{background:rgba(255,255,255,.65);box-shadow:none;border:1.5px dashed var(--lav)}
+.card h3{font-size:1.6rem}.card .d{font-size:.85rem;color:var(--soft)}
+.chip{display:inline-block;margin-left:6px;padding:1px 10px;border-radius:999px;background:var(--lav2);color:var(--violet);font-size:.75rem;font-weight:700}
+.card button{margin-top:10px}
+.big{font-size:4rem;text-align:center;margin-top:14px;animation:tw 2.8s ease-in-out infinite}
+.msg{white-space:pre-line;font-size:1.05rem;margin:0}
+.rep{background:var(--lav2);border-radius:14px;padding:8px 12px;margin-top:8px;font-size:.92rem;white-space:pre-line}.rep small{color:var(--soft)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.opt{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.opt button{background:#fff;color:var(--violet);box-shadow:0 0 0 1.5px var(--lav)}.opt button.sel{background:linear-gradient(135deg,var(--violet),var(--hot));color:#fff}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;transition:opacity .4s;pointer-events:none;max-width:90%;text-align:center}
+#toast.on{opacity:1}
+#mute{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:40;width:42px;height:42px;padding:0;display:none;align-items:center;justify-content:center;font-size:1.1rem}
+/* admin */
+.wide{max-width:760px}
+table{width:100%;border-collapse:collapse;font-size:.9rem;background:#fff;border-radius:12px;overflow:hidden}
+th,td{padding:8px 10px;border-bottom:1px solid var(--lav2);text-align:left;vertical-align:top}
+th{background:var(--lav2);color:var(--violet)}
+.scroll{overflow-x:auto;margin-top:8px}
+h2{margin-top:22px;font-size:1.5rem}
+.pill{display:inline-block;padding:3px 12px;border-radius:999px;background:var(--lav2);color:var(--violet);font-size:.85rem;margin:2px 4px 2px 0}
+/* crash */
+#crash{position:fixed;inset:0;z-index:50;display:none}
+#crash.on{display:block}
+#crash i{position:absolute;border:2px dashed var(--violet);background:rgba(236,230,255,.8);border-radius:6px;opacity:0}
+#crash.go i{animation:show .35s forwards}
+#crash.fall i{animation:fall 1.1s ease-in forwards}
+@keyframes show{to{opacity:1}}
+@keyframes fall{from{opacity:1;transform:none}to{opacity:1;transform:translateY(120vh) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){#crash i{animation-duration:.01s!important}.fl,.star,.big{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="fl" aria-hidden="true">
+ <span style="--l:6%;--s:22px;--d:15s;--w:0s;--c:#ff8fbd">♡</span><span style="--l:20%;--s:30px;--d:19s;--w:3s;--c:#c9b8ff">♥</span>
+ <span style="--l:35%;--s:18px;--d:13s;--w:6s;--c:#ff6fae">♡</span><span style="--l:50%;--s:26px;--d:17s;--w:1s;--c:#b79bff">♥</span>
+ <span style="--l:64%;--s:20px;--d:14s;--w:8s;--c:#ffb3d1">♡</span><span style="--l:78%;--s:32px;--d:20s;--w:4s;--c:#9db4ff">♥</span>
+ <span style="--l:90%;--s:24px;--d:16s;--w:10s;--c:#ff8fbd">♡</span>
+</div>
+<button id="mute" aria-label="Music on or off">🔊</button>
+
+<section id="intro" class="screen on" data-sec="stars">
+  <div class="tt">A little surprise is waiting…</div>
+  <svg id="link"><line id="ln" x1="0" y1="0" x2="0" y2="0" opacity="0"/></svg>
+  <div class="sw" id="w1" style="left:14%;top:52%">
+    <div class="hint" id="h1">Tap this star<svg viewBox="0 0 60 70"><path d="M30 2 C10 25 50 40 30 62"/><polyline points="20,52 30,64 40,52"/></svg></div>
+    <button class="star" id="s1" aria-label="First star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z"/></svg></button>
+  </div>
+  <div class="sw" id="w2" style="left:58%;top:22%">
+    <button class="star dim" id="s2" aria-label="Second star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z"/></svg></button>
+    <div class="hint fade" id="h2"><svg viewBox="0 0 60 70" style="transform:scaleY(-1)"><path d="M30 2 C10 25 50 40 30 62"/><polyline points="20,52 30,64 40,52"/></svg>Now this one</div>
+  </div>
+  <button id="cont" class="fade" style="opacity:0">Continue ›</button>
+</section>
+
+<section id="login" class="screen" data-sec="login">
+  <div class="center">
+    <h1 style="font-size:2.8rem">One small thing…</h1>
+    <p style="color:var(--soft);margin:0">Type your secret word to continue.</p>
+    <input id="pw" type="password" placeholder="secret word" autocomplete="off" style="max-width:280px;text-align:center" aria-label="Secret word">
+    <button id="go">Open ♡</button>
+    <div id="err" role="alert" style="color:#d6477f;min-height:1.4em;font-size:.9rem"></div>
+  </div>
+</section>
+
+<section id="her" class="screen">
+  <div class="bar"><span></span><button class="alt lock">Lock 🔒</button></div>
+  <div class="hero"><h1 id="ttl"></h1><p id="sub"></p></div>
+  <div id="cards"></div>
+  <div id="say" class="card" style="--a1:#c9b8ff;--a2:#ff8fbd">
+    <h3>Something to tell him? 💌</h3>
+    <p style="color:var(--soft);margin:6px 0 10px">If you want to say something to your boyfriend, you can write it here.</p>
+    <textarea id="saytxt" rows="4" placeholder="Write here…"></textarea>
+    <button id="saybtn">Send 💌</button>
+    <div id="saylist"></div>
+  </div>
+  <div id="fin" class="center" style="min-height:0;padding-top:30px">
+    <button id="heart" style="font-size:1.4rem;padding:16px 34px">♡ Press the heart</button>
+    <button class="alt" id="send">Send everything to him 💌</button>
+  </div>
+</section>
+
+<section id="day" class="screen"><div id="dbody"></div></section>
+
+<section id="admin" class="screen wide" data-sec="admin">
+  <div class="bar"><h1 style="font-size:2.2rem">Admin panel</h1><button class="alt lock">Lock 🔒</button></div>
+  <p id="live" style="color:var(--soft);margin:4px 0"></p>
+  <button id="prev">Preview her page</button>
+  <div id="adm"></div>
+  <h2>Paste her report (backup)</h2>
+  <textarea id="paste" rows="3" placeholder="Paste the message she sent you"></textarea>
+  <button class="alt" id="load" style="margin-top:8px">Load report</button>
+</section>
+
+<section id="closed" class="screen"><div class="center">
+  <h1 style="font-size:2.6rem">Hey Susriti ♡</h1>
+  <p style="color:var(--soft)">Check your notifications.</p>
+  <p id="fmsg" style="max-width:340px;white-space:pre-line"></p>
+</div></section>
+
+<div id="crash"></div>
+<div id="toast" role="status"></div>
+
+<script>
+/* ======== EDIT THIS ======== */
+const CFG = {
+      userKey: "lavender", adminKey: "admin-lavender",   // change both
+      her: "Her name",
+      title: "Our Valentine week", sub: "One card opens each day. Tap it when it’s ready.",
+      wa: "918348286762",  // your WhatsApp number with country code, digits only, e.g. 919876543210
+      finalMsg: "Always yours, babe\n",
+      useDates: false,   // true = cards open on their dates | false = every card is open now
+      earlyDays: 1,     // she can open tomorrow's card one day early (0 = only on the day)
+      music: "",        // optional: your own audio file as a data: link. Empty = soft built-in melody
+      cards: [
+        { d: "2027-02-07", i: "🌹", t: "Rose Day", m: "I want to give you all the roses that exist in this entire world. Will you accept the rose of mine? And will you be my rose, the one I can admire, adore and stare  at for the rest of my life? 🌹" },
+        { d: "2027-02-08", i: "💍", t: "Propose Day", m: "You already know how I feel for you. I want a propose event to express my feelings towards you. I will obviously do that but right now I don't feel I am that worthy. So will you please wait for me?" },
+        { d: "2027-02-09", i: "🍫", t: "Chocolate Day", m: "There are so many chocolates in this whole world, but I feel privileged to know that your favourite one is Diary Milk. I will buy you as many as you want, just to see that beautiful smile on your face. Anything for you my sweet Diary Milk (you) 🍫" },
+        { d: "2027-02-10", i: "🧸", t: "Teddy Day", m: "I know you have a little allergy to soft toys, but if I can find the safest one for you, I'will definitely gift it to you. After all, I don't want my teddy to cause you any trouble.\nBut hey, there's an another option too...\nYou can use me as your personal teddy 🫠\nI am always available for unlimited hugs." },
+        { d: "2027-02-11", i: "🤝", t: "Promise Day", m: "I can't promise you that every day will be perfect or that we'll never have disagreements. But I can promise you that I'll always try to understand you, listen to you and make you smile whenever I can.\nAnd one more promise… I'll never stop finding little ways to make you feel special. ❤️\nHappy Promise Day, my favourite person! 🫶" },
+        { d: "2027-02-12", i: "🤗", t: "Hug Day", m: "I wish I could hold you close, make you forget all your worries for a while and stay like that for as long as possible.\nUntil I get that chance, here's a virtual hug from me. Sending you the tightest one! 🫂" },
+        { d: "2027-02-13", i: "😘", t: "Kiss Day", m: "I wish I could give you a little kiss on your forehead, just to remind you how special you are to me. And a kiss on your cheeks to make you blush.\nSending you lots of them! \nHappy Kiss Day 😘" },
+        { d: "2027-02-14", i: "💜", t: "Valentine’s Day", m: "Among all the people I could have met in this world, I'm glad that I met you. You have become such a beautiful part of my life that even the smallest things remind me of you.\nI don't know what the future holds for us, but I know that I want to keep making beautiful memories with you, sharing silly moments, laughing together and finding happiness in the little things.\nIf I had to choose again, I'd still choose you. Not just for Valentine's Day, but for all the ordinary days that make life beautiful.\nHappy Valentine's Day, my favourite person. ❤️" }
+      ]
+    };
+/* =========================== */
+const ACC=[["#ff8fbd","#c9b8ff"],["#c9b8ff","#7f5cf0"],["#ffb3d1","#ff6fae"],["#9db4ff","#c9b8ff"],["#7f5cf0","#ff8fbd"],["#b79bff","#8fb0ff"],["#ff6fae","#b79bff"],["#ff6fae","#7f5cf0"]];
+const $=id=>document.getElementById(id);
+const store=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}};
+let role=store("vrole")||null,preview=false,Sbak=null,docRef=null,colRef=null,dirty=false,lastSnap=null;
+let S={stars:0,opened:{},clicks:{},taps:0,replies:{},notes:[],heart:null,seen:null};
+try{const x=JSON.parse(store("vs")||"null");if(x)S=Object.assign(S,x)}catch(e){}
+const who=()=>preview?"her":role;
+const SC=["intro","login","her","day","admin","closed"];
+function show(id){SC.forEach(s=>$(s).classList.toggle("on",s===id));scrollTo(0,0);
+  $("mute").style.display=id==="admin"?"none":"flex"}
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),3500)}
+function notify(t,b){toast(b);try{if("Notification" in window&&Notification.permission==="granted")new Notification(t,{body:b})}catch(e){}}
+const el=(t,x,c)=>{const e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e};
+function fmt(d){return new Date(d+"T00:00:00").toLocaleDateString(undefined,{month:"long",day:"numeric"})}
+function when(s){return s?new Date(s).toLocaleString():"-"}
+
+/* ---- db (works only if the viewer is allowed to write) ---- */
+(async()=>{try{if(!(window.claude&&claude.use))return;const d=await claude.use("db");if(!d)return;const u=await claude.use("user");const id=u?await u.id():"guest";
+  docRef=d.doc("progress/"+id);colRef=d.collection("progress");if(role==="admin"&&$("admin").classList.contains("on"))watch()}catch(e){}})();
+function save(){if(preview)return;S.seen=new Date().toISOString();store("vs",JSON.stringify(S));
+  if(docRef&&role!=="admin"){docRef.set(JSON.parse(JSON.stringify(S))).catch(()=>{})}dirty=false}
+setInterval(()=>{if(dirty&&role!=="admin"&&!preview)save()},4000);
+
+/* ---- music ---- */
+let ac=null,mg=null,tick=null,playing=false,au=null;
+function note(f){const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(1,t+.06);g.gain.exponentialRampToValueAtTime(.001,t+2.2);
+  o.connect(g);g.connect(mg);o.start(t);o.stop(t+2.3)}
+function startMusic(){
+  if(playing)return;playing=true;$("mute").textContent="🔊";
+  try{
+    if(CFG.music){au=au||new Audio(CFG.music);au.loop=true;au.volume=.25;au.play().catch(()=>{})}
+    else{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();
+      if(!mg){mg=ac.createGain();mg.gain.value=.07;mg.connect(ac.destination)}
+      const ch=[[220,261.6,329.6,440],[174.6,220,261.6,349.2],[261.6,329.6,392,523.3],[196,246.9,293.7,392]];let i=0;
+      const step=()=>{note(ch[Math.floor(i/4)%4][i%4]);i++};step();tick=setInterval(step,650)}
+  }catch(e){}
+}
+function stopMusic(){playing=false;clearInterval(tick);if(au)au.pause();$("mute").textContent="🔇"}
+let userMuted=false,armed=true;
+$("mute").onclick=()=>{if(playing){userMuted=true;stopMusic()}else{userMuted=false;startMusic()}};
+/* music starts on the very first tap anywhere */
+const arm=()=>{if(!armed)return;armed=false;if(!userMuted&&role!=="admin")startMusic()};
+["click","touchend","keydown"].forEach(ev=>document.addEventListener(ev,arm,true));
+
+/* ---- routing (back and forward buttons work) ---- */
+function go(r){if(location.hash==="#"+r)route();else location.hash=r}
+window.addEventListener("hashchange",route);
+function route(){
+  let r=location.hash.slice(1);
+  if(!r)r=S.heart&&role==="her"?"closed":role==="admin"?"admin":role==="her"?"her":S.stars>=2?"login":"stars";
+  const m=/^day-(\d+)$/.exec(r);
+  if(r==="stars")return showStars();
+  if(r==="login")return show("login");
+  if(r==="closed"&&S.heart){$("fmsg").textContent=CFG.finalMsg;return show("closed")}
+  if(r==="admin"&&role==="admin"){stopMusic();if(preview&&Sbak){S=Sbak;Sbak=null}preview=false;show("admin");watch();draw(lastSnap||S);return}
+  if(who()==="her"){
+    if(r==="her"){renderList();return show("her")}
+    if(m&&+m[1]>=1&&+m[1]<=CFG.cards.length){renderDay(+m[1]);return show("day")}
+  }
+  location.replace("#login");
+}
+
+/* ---- stars ---- */
+function placeLink(){const a=$("s1").getBoundingClientRect(),b=$("s2").getBoundingClientRect(),l=$("ln");
+  l.setAttribute("x1",a.left+a.width/2);l.setAttribute("y1",a.top+a.height/2);l.setAttribute("x2",b.left+b.width/2);l.setAttribute("y2",b.top+b.height/2);l.setAttribute("opacity",1)}
+function showStars(){show("intro");
+  if(S.stars>=2){["s1","s2"].forEach(i=>$(i).classList.add("done"));$("s2").classList.remove("dim");$("h1").style.display="none";$("h2").style.opacity=0;$("cont").style.opacity=1;setTimeout(placeLink,650)}}
+$("s1").onclick=()=>{$("s1").classList.add("done");$("h1").style.display="none";$("s2").classList.remove("dim");$("h2").style.opacity=1;S.stars=Math.max(S.stars,1);dirty=true};
+$("s2").onclick=()=>{$("s2").classList.add("done");$("h2").style.opacity=0;S.stars=2;dirty=true;placeLink();$("cont").style.opacity=1;setTimeout(()=>go("login"),1600)};
+$("cont").onclick=()=>go("login");
+
+/* ---- keyword ---- */
+function enter(){
+  const v=$("pw").value.trim();
+  try{if("Notification" in window&&Notification.permission==="default")Notification.requestPermission()}catch(e){}
+  if(v===CFG.userKey){role="her";store("vrole","her");startMusic();go(S.heart?"closed":"her")}
+  else if(v===CFG.adminKey){role="admin";store("vrole","admin");go("admin")}
+  else $("err").textContent="That’s not the word. Try again.";
+}
+$("go").onclick=enter;$("pw").addEventListener("keydown",e=>{if(e.key==="Enter")enter()});
+document.querySelectorAll(".lock").forEach(b=>b.onclick=()=>{role=null;preview=false;store("vrole","");stopMusic();$("pw").value="";go("login")});
+
+/* ---- her list ---- */
+const unlocked=c=>preview||!CFG.useDates||new Date()>=new Date(new Date(c.d+"T00:00:00")-CFG.earlyDays*864e5);
+function renderList(){
+  $("ttl").textContent=CFG.title;$("sub").textContent=CFG.sub;
+  const box=$("cards");box.textContent="";
+  CFG.cards.forEach((c,i)=>{
+    const n=i+1,ok=unlocked(c),open=!!S.opened["c"+n];
+    const x=el("div","","card"+(ok?"":" lock"));x.dataset.sec="card-"+n;x.style.setProperty("--a1",ACC[i%8][0]);x.style.setProperty("--a2",ACC[i%8][1]);
+    const h=el("h3",(ok?c.i+" "+c.t:"🔒 Not yet…"));
+    if(ok&&open)h.append(el("span","Opened ✓","chip"));
+    x.append(h,el("div",ok?fmt(c.d):"Opens on "+fmt(c.d),"d"));
+    if(ok){const b=el("button",open?"Read again ›":"Open ›");b.onclick=()=>go("day-"+n);x.append(b)}
+    box.append(x);
+  });
+  renderSay();
+}
+function toWA(t){
+  if(!CFG.wa){toast("Saved ✓");return}
+  try{const w=window.open("https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(t),"_blank");if(w){toast("Saved ✓ Press send in WhatsApp so he gets it");return}}catch(e){}
+  try{navigator.clipboard.writeText(t);toast("Saved ✓ Copied. Paste it in a chat with him.")}catch(e){toast("Saved ✓")}
+}
+function renderSay(){const L=$("saylist");L.textContent="";
+  (S.notes||[]).forEach(x=>{const d=el("div","","rep");d.append(el("small",new Date(x.at).toLocaleString()),el("br"),document.createTextNode(x.t));L.append(d)})}
+$("saybtn").onclick=()=>{const v=$("saytxt").value.trim();if(!v)return toast("Write something first");
+  (S.notes=S.notes||[]).push({t:v,at:new Date().toISOString()});save();$("saytxt").value="";renderSay();toWA("A message for you 💌\n"+v)};
+
+/* ---- one day ---- */
+function renderDay(n){
+  const c=CFG.cards[n-1],id="c"+n,ok=unlocked(c),open=!!S.opened[id],b=$("dbody");b.textContent="";
+  $("day").dataset.sec="day-"+n;
+  const top=el("div","","bar");const back=el("button","‹ All days","alt");back.onclick=()=>go("her");top.append(back,el("span"));b.append(top);
+  const hero=el("div","","hero");hero.append(el("div",ok?c.i:"🔒","big"),el("h1",ok?c.t:"Not yet…"),el("p",ok?fmt(c.d):"Opens on "+fmt(c.d)));b.append(hero);
+  const card=el("div","","card");card.style.setProperty("--a1",ACC[(n-1)%8][0]);card.style.setProperty("--a2",ACC[(n-1)%8][1]);
+  if(!ok){card.append(el("p","This card isn’t ready yet. Come back on its day ♡","msg"))}
+  else if(!open){const o=el("button","Open my message 💌");o.style.margin="6px auto";o.style.display="block";
+    o.onclick=()=>{S.opened[id]=new Date().toISOString();save();renderDay(n)};card.append(o)}
+  else card.append(el("p",c.m,"msg"));
+  b.append(card);
+  if(ok&&open){
+    const r=el("div","","card");r.dataset.sec="reply-"+n;r.style.setProperty("--a1","#c9b8ff");r.style.setProperty("--a2","#ff8fbd");
+    r.append(el("h3","Write back to me ♡"));
+    const t=el("textarea");t.rows=3;t.placeholder="Type anything you want to tell me…";t.style.marginTop="8px";
+    const s=el("button","Send 💌");
+    s.onclick=()=>{const v=t.value.trim();if(!v)return toast("Write something first");
+      (S.replies[id]=S.replies[id]||[]).push({t:v,at:new Date().toISOString()});save();renderDay(n);toWA("Day "+n+" ("+c.t+") 💌\n"+v)};
+    r.append(t,s);
+    (S.replies[id]||[]).forEach(x=>{const d=el("div","","rep");d.append(el("small",new Date(x.at).toLocaleString()),el("br"),document.createTextNode(x.t));r.append(d)});
+    b.append(r);
+  }
+  const nav=el("div","","nav");
+  const pv=el("button","‹ Day "+(n-1),"alt"),nx=el("button","Day "+(n+1)+" ›","alt");
+  pv.disabled=n<=1;nx.disabled=n>=CFG.cards.length;pv.onclick=()=>go("day-"+(n-1));nx.onclick=()=>go("day-"+(n+1));
+  nav.append(pv,nx);b.append(nav);
+}
+
+/* ---- report + finale ---- */
+function report(){const L=["From her 💜"];
+  Object.keys(S.replies).forEach(k=>S.replies[k].forEach(r=>L.push("Day "+k.slice(1)+": "+r.t)));
+  (S.notes||[]).forEach(r=>L.push("Note: "+r.t));
+  L.push("CODE:"+btoa(unescape(encodeURIComponent(JSON.stringify(S)))));return L.join("\n")}
+$("send").onclick=()=>{const t=report();
+  if(CFG.wa){try{window.open("https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(t),"_blank");return}catch(e){}}
+  try{navigator.clipboard.writeText(t);toast("Copied. Paste it in a chat with him.")}catch(e){toast("Could not copy.")}};
+$("heart").onclick=()=>{
+  if(!preview){S.heart=new Date().toISOString();save()}else S.heart=S.heart||"preview";
+  notify("For you ♡",CFG.finalMsg);
+  const c=$("crash");c.textContent="";c.className="on";
+  const cols=6,w=innerWidth/cols,rows=Math.ceil(innerHeight/w);
+  for(let r=0;r<rows;r++)for(let k=0;k<cols;k++){const i=document.createElement("i");
+    i.style.cssText=`left:${k*w}px;top:${r*w}px;width:${w}px;height:${w}px;animation-delay:${r*.16+Math.random()*.1}s`;c.append(i)}
+  requestAnimationFrame(()=>c.classList.add("go"));
+  setTimeout(()=>{stopMusic();location.replace("#closed");c.classList.remove("go");c.classList.add("fall");
+    c.querySelectorAll("i").forEach((i,n)=>i.style.animationDelay=(Math.floor(n/cols)*.12)+"s")},rows*160+900);
+  setTimeout(()=>{c.className=""},rows*160+3400);
+};
+
+/* ---- admin ---- */
+const countReplies=d=>Object.values(d.replies||{}).reduce((a,b)=>a+b.length,0)+(d.notes||[]).length;
+function watch(){
+  if(!colRef){$("live").textContent="Live link: not connected. You will only see data from this device, or a pasted report.";return}
+  $("live").textContent="Live link: connected.";if(watch.on)return;watch.on=true;
+  colRef.onSnapshot(qs=>{const d=qs.docs.filter(x=>x.exists).map(x=>x.data()).sort((a,b)=>String(b.seen).localeCompare(String(a.seen)))[0];if(!d)return;
+    if(lastSnap){
+      if(Object.keys(d.opened||{}).length>Object.keys(lastSnap.opened||{}).length)notify("She opened a card","Cards opened: "+Object.keys(d.opened).length);
+      if(countReplies(d)>countReplies(lastSnap))notify("New reply 💌","She wrote back to you.");
+      if(d.heart&&!lastSnap.heart)notify("She pressed the heart ♡","The site closed for her.")}
+    lastSnap=d;if($("admin").classList.contains("on"))draw(d)},()=>{});
+}
+function table(head,rows){const w=el("div","","scroll"),t=el("table"),tr=el("tr");head.forEach(h=>tr.append(el("th",h)));t.append(tr);
+  rows.forEach(r=>{const x=el("tr");r.forEach(c=>x.append(el("td",c)));t.append(x)});w.append(t);return w}
+function draw(d){
+  const a=$("adm");a.textContent="";
+  const p=el("p");[["Last seen",when(d.seen)],["Messages from her",countReplies(d)],["Heart pressed",d.heart?when(d.heart):"not yet"]]
+    .forEach(x=>p.append(el("span",x[0]+": "+x[1],"pill")));a.append(p);
+  a.append(el("h2","Her replies to each day"));
+  const rep=[];Object.keys(d.replies||{}).forEach(k=>d.replies[k].forEach(r=>rep.push([+k.slice(1),r.at,r.t])));rep.sort((x,y)=>String(y[1]).localeCompare(String(x[1])));
+  a.append(table(["Day","Time","Message"],rep.length?rep.map(r=>[CFG.cards[r[0]-1].t,when(r[1]),r[2]]):[["No replies yet","-","-"]]));
+  a.append(el("h2","Her message to you"));
+  const nt=(d.notes||[]).slice().reverse();
+  a.append(table(["Time","Message"],nt.length?nt.map(r=>[when(r.at),r.t]):[["No messages yet","-"]]));
+  a.append(el("h2","Cards she opened"));
+  a.append(table(["Day","Card","Opened at"],CFG.cards.map((c,i)=>[fmt(c.d),c.t,when((d.opened||{})["c"+(i+1)])])));
+}
+$("prev").onclick=()=>{userMuted=false;startMusic();Sbak=JSON.parse(JSON.stringify(S));preview=true;go("her")};
+$("load").onclick=()=>{const m=/CODE:([A-Za-z0-9+/=]+)/.exec($("paste").value);
+  try{draw(JSON.parse(decodeURIComponent(escape(atob(m[1])))));toast("Report loaded")}catch(e){toast("Could not read that report")}};
+
+/* ---- Refresh button (admin page) ---- */
+(function(){
+  const btn=el("button","🔄 Refresh","alt");btn.style.marginLeft="8px";$("prev").after(btn);
+  btn.onclick=async()=>{
+    btn.disabled=true;btn.textContent="Refreshing…";let d=null;
+    try{if(colRef){const qs=await colRef.get();d=qs.docs.filter(x=>x.exists).map(x=>x.data()).sort((x,y)=>String(y.seen).localeCompare(String(x.seen)))[0]||null;if(d)lastSnap=d}}catch(e){}
+    if(!d){try{const x=JSON.parse(store("vs")||"null");if(x)d=Object.assign({},S,x)}catch(e){}}
+    draw(d||lastSnap||S);toast("Refreshed ✓");btn.disabled=false;btn.textContent="🔄 Refresh";
+  };
+})();
+
+route();
+/* ---- Clear test data button (admin page) ---- */
+(function(){
+  const b=el("button","🗑 Clear test data","alt");b.style.marginLeft="8px";$("prev").after(b);
+  b.onclick=async()=>{
+    if(!confirm("Delete ALL replies, messages and opened-card data saved on this device"+(docRef?" and in the live link":"")+"? This cannot be undone."))return;
+    S={stars:0,opened:{},clicks:{},taps:0,replies:{},notes:[],heart:null,seen:null};
+    Sbak=null;lastSnap=null;
+    try{localStorage.removeItem("vs")}catch(e){}
+    try{if(docRef)await docRef.set(JSON.parse(JSON.stringify(S)))}catch(e){}
+    draw(S);toast("Test data cleared ✓");
+  };
+})();
+</script>
+</body>
+</html>
